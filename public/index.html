@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff Tasks</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Staff Tasks</h1>
+    <div class="topbar-actions">
+      <span id="status" role="status"></span>
+      <button id="refresh" type="button" class="ghost">Refresh</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel work">
+      <div class="panel-head">
+        <h2>Task instances</h2>
+        <div class="filters">
+          <select id="filter-staff" aria-label="Filter by staff"></select>
+          <select id="filter-status" aria-label="Filter by status"></select>
+        </div>
+      </div>
+      <ul id="instances" class="cards"></ul>
+    </section>
+
+    <aside class="side">
+      <section class="panel">
+        <h2>Schedule a task</h2>
+        <form id="schedule-form" class="stack">
+          <label>Task <select name="templateId" required></select></label>
+          <label>Assign to <select name="staffId" required></select></label>
+          <label>Repeats <select name="recurrence"></select></label>
+          <label>First due <input type="datetime-local" name="startAt" required></label>
+          <button type="submit">Schedule and assign</button>
+        </form>
+        <h3>Schedules</h3>
+        <ul id="schedules" class="list"></ul>
+      </section>
+
+      <section class="panel">
+        <h2>Task library</h2>
+        <form id="template-form" class="stack">
+          <input name="title" placeholder="Task title" required maxlength="120">
+          <input name="category" placeholder="Category (optional)" maxlength="60">
+          <textarea name="description" placeholder="Instructions (optional)" maxlength="2000" rows="3"></textarea>
+          <button type="submit">Save task</button>
+        </form>
+        <ul id="templates" class="list"></ul>
+      </section>
+
+      <section class="panel">
+        <h2>Staff</h2>
+        <form id="staff-form" class="stack">
+          <input name="name" placeholder="Name" required maxlength="80">
+          <input name="role" placeholder="Role (optional)" maxlength="80">
+          <button type="submit">Add staff member</button>
+        </form>
+        <ul id="staff" class="list"></ul>
+      </section>
+    </aside>
+  </main>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
