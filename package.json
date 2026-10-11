@@ -1,0 +1,14 @@
+{
+  "name": "staff-task-manager",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Manage reusable, scheduled staff tasks and track their completion status",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test test/*.test.js"
+  }
+}

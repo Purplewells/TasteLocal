@@ -65,3 +65,35 @@ The intent is to partner with local food vendors and collect:
 #### Payment Integration
 - Mobile Money APIs (e.g., MTN Mobile Money, Vodafone Cash).
 - Payment gateways like Flutterwave or Paystack for card payments.
+
+## 4. Staff Task Manager
+
+A small internal tool for assigning and tracking recurring staff tasks.
+
+- **Task library**: reusable task definitions (title, category, instructions).
+- **Staff**: people who can be assigned work.
+- **Schedules**: assign a library task to a staff member, once or on a daily, weekly or monthly repeat.
+- **Task instances**: generated automatically from each schedule (up to 7 days ahead). Staff open their work queue, set a status (open, in progress, completed, partially completed, not completed) and add notes. Unfinished instances past their due time are flagged as overdue.
+
+### Running it
+
+Requires Node.js 18 or newer. There are no dependencies to install.
+
+```bash
+npm start            # http://localhost:3000 (set PORT to change)
+npm test             # unit and API tests
+```
+
+Data is stored in `data/db.json` (override with `DATA_FILE`). The scheduler checks for due occurrences every minute and whenever a schedule is created or resumed.
+
+### API
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| GET/POST | `/api/staff` | List or add staff |
+| GET/POST | `/api/templates` | List or add library tasks |
+| PATCH/DELETE | `/api/templates/:id` | Edit or delete a library task (delete is refused while schedules use it) |
+| GET/POST | `/api/schedules` | List schedules, or assign a task and generate its instances |
+| PATCH/DELETE | `/api/schedules/:id` | Pause/resume (`{"active": true|false}`) or delete a schedule |
+| GET | `/api/instances?staffId=&status=` | Work queue, sorted by due date |
+| PATCH | `/api/instances/:id` | Set `status` and/or `notes` |
